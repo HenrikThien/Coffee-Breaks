@@ -4,7 +4,7 @@ import CoffeeBreak from './coffee_break';
 
 admin.initializeApp();
 
-const SLACK_TOKEN = '<token>';
+const SLACK_TOKEN = 'UePJZA7nekGTlsW1dnODEdoq';
 
 exports.handleSlackSlashCommand = functions.https.onRequest((req, res) => {
   if (req.body.token !== SLACK_TOKEN) {
@@ -27,10 +27,10 @@ exports.handleSlackSlashCommand = functions.https.onRequest((req, res) => {
     let response = "";
 
     for (const group in groups) {
-      const output: string = "[" + group + "]: " + groups[group].toString() + "\n";
+      const output: string = "*" + group + "* => *" + groups[group].join(', ') + "* |\n";
       response += output;
     }
-
+    
     const message = {
       response_type: 'in_channel',
       blocks: [
