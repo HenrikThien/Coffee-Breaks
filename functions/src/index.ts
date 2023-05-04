@@ -24,11 +24,18 @@ exports.handleSlackSlashCommand = functions.https.onRequest((req, res) => {
     const coffeeBreak = new CoffeeBreak();
     const groups: Record<string, string[]> = coffeeBreak.generate();
 
-    let response = "";
+    let fields = [];
 
     for (const group in groups) {
-      const output: string = "*" + group + "* => *" + groups[group].join(', ') + "* |\n";
-      response += output;
+      // const output: string = "*" + group + "* => *" + groups[group].join(', ') + "* |\n";
+      fields.push({
+        type: "mrkdwn",
+        text: "*" + group + "*",
+      });
+      fields.push({
+        type: "mrkdwn",
+        text: "*" + groups[group].join(", ") + "*"
+      });
     }
     
     const message = {
@@ -47,10 +54,7 @@ exports.handleSlackSlashCommand = functions.https.onRequest((req, res) => {
           },
           {
             type: "section",
-            text: {
-              type: "mrkdwn",
-              text: response
-            }
+            fields: fields,
           }
       ]
     }
