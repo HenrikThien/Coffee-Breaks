@@ -1,5 +1,5 @@
 export default class CoffeeBreak {
-    readonly names: Array<string> = ['Ryan', 'Mehdi', 'Lars', 'Henrik', 'Hurriat', 'Christa', 'Simon', 'Phil', 'Vlad', 'Christine', 'Anees', 'Bartosch', 'Sunil', 'Hussnain'];
+    private names: Array<string> = [];
     readonly emojis: Array<string> = ["☕️", "🍩", "🥐", "🥪", "🧁", "🍰", "🍪", "🍩", "🌞", "🧡", "🤍", "🦧"];
     readonly groupNames: Array<string> = [
         'Sunshine Squad ☀️', 'Happy Hour Heroes 🍻', 'Joyful Jesters 🤡', 'Radiant Rascals ✨', 'Positive Pals 👍',
@@ -8,6 +8,10 @@ export default class CoffeeBreak {
         'Optimistic Oasis 🌴', 'Friendly Faces 🙂', 'Harmony Huddle 🎵', 'Grin and Bear It 🐻', 'Zen Zone Zephyrs 🌬️', 
         'Carefree Crew 🌈'
     ];
+
+    constructor(names: Array<string>) {
+      this.names = names;
+    }
 
     public generate(): Record<string, string[]> {
         const shuffledNames = this.shuffleArray<string>(this.names);
